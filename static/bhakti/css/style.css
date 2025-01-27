@@ -1,0 +1,213 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    padding-bottom: 6em;
+
+}
+
+nav {
+    background-color: #6200ea;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    color: #fff;
+    padding: 1.5rem 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+
+.nav-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nav-container button {
+    padding: 0;
+    border: none;
+    background-color: transparent;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+}
+
+.nav-logo {
+    width: 50px;
+    height: 50px;
+    margin-right: 15px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.nav-title {
+    font-size: 1.6em;
+    font-weight: bold;
+    color: #fff;
+    margin: 0;
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.menu .menu-name {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+.menu .menu-name li {
+    list-style: none;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    padding: 0.7em 1em;
+    margin: 0.6em;
+    font-size: 1.5em;
+    text-transform: capitalize;
+    display: flex;
+    align-items: center;
+    border-radius: 0.1em;
+    color: #444;
+}
+
+
+.menu .menu-name li img {
+    width: 2em;
+    margin-right: 1em;
+    border-radius: 50%;
+}
+
+.floating-counter {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #fff;
+    width: 100%;
+    display: flex;
+    background: transparent;
+    backdrop-filter: blur(1em);
+    padding-bottom: 0.5em;
+}
+
+.floating-counter button {
+    border: none;
+    color: #fff;
+
+}
+
+.floating-counter .add {
+    background-color: #6200ea;
+    font-size: 1.8em;
+    padding: 0.4em 2em 0.4em 1em;
+    border-radius: 0 1.5em 1.5em 0;
+    margin-right: 0.5em;
+    width: 100%;
+
+}
+
+.floating-counter .sub {
+    background-color: #6200ea;
+    font-size: 1.8em;
+    padding: 0.4em 1em;
+    border-radius: 1.5em 0 0 1.5em;
+    border-right: 2px solid #fff;
+    margin-left: 0.5em;
+}
+
+.counter-value {
+    margin-right: 0.5em;
+
+}
+
+
+
+
+
+
+.info-container {
+    padding: 0.5em 1em;
+    display: none;
+}
+
+.info-heading {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #808080;
+    margin-bottom: 1.5em;
+}
+
+.info-heading h3 {
+    margin-left: 1em;
+    font-weight: 500;
+    font-size: 1.3em;
+}
+
+.info-heading #back-btn {
+    padding: 0.5em;
+    border-radius: 50%;
+}
+
+
+.info-desc p {
+    font-size: 1.4em;
+    color: #273b4d;
+    line-height: 1.6;
+    text-align: center;
+    margin: 0.6em 0;
+}
+
+.info-desc img {
+    width: 100%;
+    border-radius: 1em;
+}
+
+
+.info-desc p {
+    font-size: 1.4em;
+    /* default font size */
+    transition: font-size 0.3s ease;
+}
+
+
+
+.round-btn {
+    color: black;
+    background-color: transparent;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5em;
+    /* Set the font size */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+
+.font-btns {
+    display: flex;
+    align-items: center;
+    flex-direction: row-reverse;
+}
+
+#info-title {
+    width: 100%;
+}

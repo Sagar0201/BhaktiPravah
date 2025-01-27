@@ -13,6 +13,11 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 import os
 
+
+from django.core.wsgi import get_wsgi_application
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'BhaktiPravah.settings')
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -24,7 +29,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-up_63yb96^ke=+zr*!(q_4cth&po&&7&enhdxj8f3gavfv*3&&"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['bhaktipravah.onrender.com', 'localhost']
 
@@ -33,7 +38,7 @@ ALLOWED_HOSTS = ['bhaktipravah.onrender.com', 'localhost']
 # Application definition
 
 INSTALLED_APPS = [
-    "django.contrib.admin",
+    'django.contrib.admin',
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",

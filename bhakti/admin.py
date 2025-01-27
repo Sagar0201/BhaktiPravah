@@ -1,6 +1,9 @@
 from django.contrib import admin
 from .models import Category
 from .models import Information
+from .models import Title
 
-admin.site.register(Category)  # Register the Category model to the admin panel
-admin.site.register(Information)  # Register the Information model to the admin panel
+admin.site.register(Category) 
+admin.site.register(Title) 
+admin.site.register(Information)  
+

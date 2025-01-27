@@ -14,6 +14,9 @@ from pathlib import Path
 import os
 
 
+from django.core.wsgi import get_wsgi_application
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'BhaktiPravah.settings')
+# application = get_wsgi_application()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -26,9 +29,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-up_63yb96^ke=+zr*!(q_4cth&po&&7&enhdxj8f3gavfv*3&&"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['bhaktipravah.onrender.com', 'localhost']
+ALLOWED_HOSTS = ['bhaktipravah.onrender.com', 'localhost','127.0.0.1']
 
 
 
@@ -127,16 +130,26 @@ USE_I18N = True
 USE_TZ = True
 
 
-# URL for serving static files
+# # URL for serving static files
+# STATIC_URL = '/static/'
+
+# # The directory where collected static files will be stored (in production)
+# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# # Additional directories to look for static files (if you have them in specific app folders)
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, 'static'),  # Tell Django to look inside the static folder at the project level
+# ]
+
+
 STATIC_URL = '/static/'
+# This production code might break development mode, so we check whether we're in DEBUG mode
+if not DEBUG:    # Tell Django to copy static assets into a path called `staticfiles` (this is specific to Render)
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+    # Enable the WhiteNoise storage backend, which compresses static files to reduce disk use
+    # and renames the files with unique names for each version to support long-term caching
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-# The directory where collected static files will be stored (in production)
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
-# Additional directories to look for static files (if you have them in specific app folders)
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),  # Tell Django to look inside the static folder at the project level
-]
 
 # Media files (uploads)
 MEDIA_URL = '/media/'

@@ -1,12 +1,12 @@
-
-# exit on error
+#!/usr/bin/env bash
+# Exit on error
 set -o errexit
 
-# change this line for whichever package you use, such as pip, or poetry, etc.
+# Modify this line as needed for your package manager (pip, poetry, etc.)
 pip install -r requirements.txt
 
-# convert our static asset files on Render
+# Convert static asset files
 python manage.py collectstatic --no-input
 
-# apply any database migrations that are outstanding
+# Apply any outstanding database migrations
 python manage.py migrate

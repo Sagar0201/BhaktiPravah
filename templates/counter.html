@@ -141,7 +141,7 @@
 
      <button class="reset-btn" onclick="resetCounter()">Reset</button>
 
-     <audio id="beepSound" src="https://www.soundjay.com/button/beep-07.wav"></audio>
+     <audio id="beepSound" src="{% static 'bhakti/sound/tune.mp3' %}"></audio>
 
 </section>
 
@@ -151,16 +151,13 @@
 {% block extra_scripts %}
 <script>
      let todayCount = localStorage.getItem("todayCount") ? parseInt(localStorage.getItem("todayCount")) : 0;
-     let lifetimeCount = localStorage.getItem("lifetimeCount") ? parseInt(localStorage.getItem("lifetimeCount")) :
-          0;
+     let lifetimeCount = localStorage.getItem("lifetimeCount") ? parseInt(localStorage.getItem("lifetimeCount")) : 0;
      let todayRounds = localStorage.getItem("todayRounds") ? parseInt(localStorage.getItem("todayRounds")) : 0;
-     let lifetimeRounds = localStorage.getItem("lifetimeRounds") ? parseInt(localStorage.getItem(
-          "lifetimeRounds")) : 0;
+     let lifetimeRounds = localStorage.getItem("lifetimeRounds") ? parseInt(localStorage.getItem("lifetimeRounds")) : 0;
      let lastSessionDate = localStorage.getItem("sessionDate");
 
      function formatDateTime() {
           const now = new Date();
-
           const options = {
                weekday: 'short',
                year: 'numeric',
@@ -170,22 +167,23 @@
                minute: '2-digit',
                hour12: true
           };
-
           return now.toLocaleString('en-GB', options);
      }
 
      function getCurrentDate() {
-          return formatDateTime();
+          const now = new Date();
+          return now.toISOString().split('T')[0]; // Only date part: YYYY-MM-DD
      }
 
      function checkNewDay() {
           let currentDate = getCurrentDate();
           if (lastSessionDate !== currentDate) {
+               // New day - reset today's count and rounds
                todayCount = 0;
                todayRounds = 0;
                localStorage.setItem("todayCount", todayCount);
                localStorage.setItem("todayRounds", todayRounds);
-               localStorage.setItem("sessionDate", currentDate);
+               localStorage.setItem("sessionDate", currentDate); // Update session date
           }
      }
 
@@ -209,7 +207,7 @@
      }
 
      function incrementCounter() {
-          checkNewDay();
+          checkNewDay();  // Check if it's a new day and reset counts if necessary
           todayCount++;
 
           if (todayCount > 108) {
@@ -233,7 +231,7 @@
      }
 
      function decrementCounter() {
-          checkNewDay();
+          checkNewDay(); // Check if it's a new day and reset counts if necessary
           if (todayCount > 0) {
                todayCount--;
                lifetimeCount = Math.max(0, lifetimeCount - 1);
@@ -253,8 +251,8 @@
           vibrate();
      }
 
-     checkNewDay();
+     // Initialize the page with the correct data
+     checkNewDay();  // Ensure "todayCount" resets when a new day starts
      updateDisplay();
 </script>
-
 {% endblock %}

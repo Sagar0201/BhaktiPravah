@@ -7,14 +7,229 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home - BhaktiPravah</title>
-    <link rel="stylesheet" href="{% static 'bhakti/css/style.css' %}">
 </head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f9f9f9;
+        padding-bottom: 6em;
+
+    }
+
+    nav {
+        background-color: #6200ea;
+        box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+        color: #fff;
+        padding: 1.5rem 2rem;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+    }
+
+    .nav-container {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .nav-container button {
+        padding: 0;
+        border: none;
+        background-color: transparent;
+    }
+
+    .nav-item {
+        display: flex;
+        align-items: center;
+    }
+
+    .nav-logo {
+        width: 50px;
+        height: 50px;
+        margin-right: 15px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+    .nav-title {
+        font-size: 1.6em;
+        font-weight: bold;
+        color: #fff;
+        margin: 0;
+    }
+
+    .menu {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 20px;
+    }
+
+    .menu .menu-name {
+        width: 100%;
+        padding: 0;
+        margin: 0;
+    }
+
+    .menu .menu-name li {
+        list-style: none;
+        box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+        padding: 0.7em 1em;
+        margin: 0.6em;
+        font-size: 1.5em;
+        text-transform: capitalize;
+        display: flex;
+        align-items: center;
+        border-radius: 0.1em;
+        color: #444;
+    }
+
+
+    .menu .menu-name li img {
+        width: 2em;
+        margin-right: 1em;
+        border-radius: 50%;
+    }
+
+    .floating-counter {
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        color: white;
+        font-size: 20px;
+        font-weight: bold;
+        text-align: center;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        color: #fff;
+        width: 100%;
+        display: flex;
+        background: transparent;
+        backdrop-filter: blur(1em);
+        padding-bottom: 0.5em;
+    }
+
+    .floating-counter button {
+        border: none;
+        color: #fff;
+
+    }
+
+    .floating-counter .add {
+        background-color: #6200ea;
+        font-size: 1.8em;
+        padding: 0.4em 2em 0.4em 1em;
+        border-radius: 0 1.5em 1.5em 0;
+        margin-right: 0.5em;
+        width: 100%;
+
+    }
+
+    .floating-counter .sub {
+        background-color: #6200ea;
+        font-size: 1.8em;
+        padding: 0.4em 1em;
+        border-radius: 1.5em 0 0 1.5em;
+        border-right: 2px solid #fff;
+        margin-left: 0.5em;
+    }
+
+    .counter-value {
+        margin-right: 0.5em;
+
+    }
+
+
+
+
+
+
+    .info-container {
+        padding: 0.5em 1em;
+        display: none;
+    }
+
+    .info-heading {
+        display: flex;
+        align-items: center;
+        border-bottom: 1px solid #808080;
+        margin-bottom: 1.5em;
+    }
+
+    .info-heading h3 {
+        margin-left: 1em;
+        font-weight: 500;
+        font-size: 1.3em;
+    }
+
+    .info-heading #back-btn {
+        padding: 0.5em;
+        border-radius: 50%;
+    }
+
+
+    .info-desc p {
+        font-size: 1.4em;
+        color: #273b4d;
+        line-height: 1.6;
+        text-align: center;
+        margin: 0.6em 0;
+    }
+
+    .info-desc img {
+        width: 100%;
+        border-radius: 1em;
+    }
+
+
+    .info-desc p {
+        font-size: 1.4em;
+        /* default font size */
+        transition: font-size 0.3s ease;
+    }
+
+
+
+    .round-btn {
+        color: black;
+        background-color: transparent;
+        border: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5em;
+        /* Set the font size */
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+
+    .font-btns {
+        display: flex;
+        align-items: center;
+        flex-direction: row-reverse;
+    }
+
+    #info-title {
+        width: 100%;
+    }
+</style>
 
 <body>
 
     <nav>
         <div class="nav-container">
-            <span class="nav-item"><img src="{% static 'bhakti/images/ganpati bappa.jpeg' %}" alt="Logo" class="nav-logo">
+            <span class="nav-item"><img src="{% static 'bhakti/images/ganpati bappa.jpeg' %}" alt="Logo"
+                    class="nav-logo">
                 <h1 class="nav-title">भक्ती प्रवाह</h1>
             </span>
             <button>
@@ -31,7 +246,8 @@
     <div class="menu" id="menu">
         <ul class="menu-name">
             <li id="menu-list1"><img src="{% static 'bhakti/images/hanuman.jpeg'%} " alt=""> श्री हनुमान चालीसा</li>
-            <li id="menu-list2"><img src="{% static 'bhakti/images/Jai Hanuman.jpeg'%} " alt="">श्री हनुमान वडवानल स्तोत्र</li>
+            <li id="menu-list2"><img src="{% static 'bhakti/images/Jai Hanuman.jpeg'%} " alt="">श्री हनुमान वडवानल
+                स्तोत्र</li>
             <li id="menu-list3"><img src="{% static 'bhakti/images/kalbhairav.jpeg'%} " alt="">श्री कालभैरवाष्टक</li>
             <li id="menu-list4"><img src="{% static 'bhakti/images/ganpati bappa.jpeg'%} " alt="">श्री गणपती आरती</li>
             <li id="menu-list5"><img src="{% static 'bhakti/images/shiv.jpeg'%} " alt="">महामृत्युंजय मंत्र</li>
@@ -434,9 +650,132 @@
 
 
 
-    <audio id="tone" src="./audio/tune.mp3"></audio>
+    <audio id="tone" src="{% static 'bhakti/sound/tune.mp3' %}"></audio> 
 
-    <script src="{% static 'bhakti/js/script.js' %}"></script>
+
+    <script>
+        document.addEventListener('click', (event) => {
+            const menuIdPrefix = 'menu-list';
+            const infoIdPrefix = 'info-';
+
+            if (event.target.id.startsWith(menuIdPrefix)) {
+                // Hide all info containers
+                document.querySelectorAll('.info-desc').forEach(info => info.style.display = 'none');
+
+                // Show the corresponding info container
+                const infoId = infoIdPrefix + event.target.id.split(menuIdPrefix)[1];
+                document.getElementById(infoId).style.display = 'block';
+
+                // Set the text of info-title
+                document.getElementById('info-title').textContent = event.target.textContent.trim();
+
+                // Hide the menu container
+                document.getElementById('menu').style.display = 'none';
+
+                // Show the info-container
+                document.querySelector('.info-container').style.display = 'block';
+
+            } else if (event.target.id === 'back-btn') {
+                // Hide the info-container
+                document.querySelector('.info-container').style.display = 'none';
+
+                // Show the menu container
+                document.getElementById('menu').style.display = 'flex';
+            } else if (event.target.id === 'add-count') {
+                updateCounter(1);
+            } else if (event.target.id === 'sub-count') {
+                updateCounter(-1);
+            } else if (event.target.id === 'reset-count') {
+                updateCounter(0, true);
+            }
+        });
+
+        function updateCounter(change, reset = false) {
+            const counterElement = document.getElementById('counter-value');
+            let counter = parseInt(counterElement.textContent);
+
+            if (reset) {
+                counter = 0;
+            } else {
+                counter = (counter + change + 109) % 109;
+            }
+
+            counterElement.textContent = counter;
+            playTone(counter);
+            navigator.vibrate([100, 50, 100, 50, 200]); // Short vibration
+
+        }
+
+        function playTone(counter) {
+            const tone = document.getElementById('tone');
+
+            switch (counter) {
+                case 11:
+                case 21:
+                case 51:
+                case 108:
+                    tone.play();
+                    break;
+            }
+        }
+
+
+
+
+
+
+        const defaultFontSize = parseFloat(getComputedStyle(document.documentElement).fontSize); // Root font size (1em)
+        const maxFontSize = 2; // Maximum size in em
+        const minFontSize = 1; // Minimum size in em
+
+        document.getElementById("fontSizeBtn").addEventListener("click", () => {
+            const pElements = document.querySelectorAll('.info-desc p');
+
+            pElements.forEach((pElement) => {
+                let currentSize = parseFloat(window.getComputedStyle(pElement).fontSize) /
+                    defaultFontSize; // Convert px to em
+
+                // Increase size or reset to minimum size
+                if (currentSize < maxFontSize) {
+                    pElement.style.fontSize = (currentSize + 0.1).toFixed(1) +
+                        'em'; // Increment by 0.1em
+                } else {
+                    pElement.style.fontSize = minFontSize + 'em'; // Reset to 1em
+                }
+            });
+        });
+
+
+
+
+        function updateCounter(change, reset = false) {
+            const counterElement = document.getElementById('counter-value');
+            let counter = parseInt(counterElement.textContent);
+
+            if (reset) {
+                counter = 0;
+            } else {
+                counter = (counter + change + 109) % 109;
+            }
+
+            // Update the counter in the DOM
+            counterElement.textContent = counter;
+
+            // Save the counter value to localStorage
+            localStorage.setItem('counter', counter);
+
+            // Play tone and vibrate
+            playTone(counter);
+            navigator.vibrate(100); // Short vibration
+        }
+
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const storedCounter = localStorage.getItem('counter');
+            const counterElement = document.getElementById('counter-value');
+            counterElement.textContent = storedCounter !== null ? storedCounter : 0;
+        });
+    </script>
 </body>
 
 </html>

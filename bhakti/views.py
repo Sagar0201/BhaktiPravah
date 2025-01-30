@@ -3,5 +3,8 @@ from .models import Category
 
 def home(request):
     categories = Category.objects.all()
-
     return render(request, 'home.html',{'categories': categories})  # Render home.html template
+
+
+def homepage(request):
+    return render(request, 'homepage.html')

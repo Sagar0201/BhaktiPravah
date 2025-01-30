@@ -1,0 +1,183 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Home - Bhakti Pravah{% endblock %}
+
+{% block css %}
+<style>
+     
+
+     /* =================================================================
+                            # SEARCH BOX
+     * ================================================================= */
+
+     .search-box-container {
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-top: 1.5rem;
+     }
+
+     .search-box {
+          width: 95%;
+          display: flex;
+          border-radius: 0.2em;
+          background-color: #ffffff;
+
+     }
+
+
+     .search-box input {
+          flex: 1;
+          border: none;
+          outline: none;
+          background: transparent;
+          padding: 0.7rem;
+          font-size: 1rem;
+          padding-left: 1.2rem;
+     }
+
+     .search-box button {
+          border: none;
+          background: none;
+          cursor: pointer;
+          font-size: 1rem;
+          color: #444;
+          padding: 0.5em;
+          border-radius: 0 1.3rem 1.3rem 0;
+          margin-right: 0.6em;
+     }
+
+
+
+     /* =================================================================
+                            # Menu List
+     * ================================================================= */
+
+     .menu-item-list{
+          margin-top: 1rem;
+     }
+
+     .list-items{
+          width: 100%;
+          display: flex;
+          flex-direction: row;
+          gap: 1rem;
+          overflow-x: auto;
+          padding: 0.3em;
+          scrollbar-width: none;
+     }
+
+     .list-items a{
+          padding: 0.2em 1.5em;
+          font-size: 1rem;
+          background-color: #ffffff8e;
+          border-radius: 0.5em;
+          color: #070707;
+          font-size: 0.9em;
+     }
+
+     .list-items .active{
+          background-color: #070707;
+          color: #fff;
+     }
+
+
+     
+     /* =================================================================
+                            # Menu List
+     * ================================================================= */
+
+
+     .data-list{
+          margin-top: 2rem;
+     }
+
+     .list-lists{
+          display: flex;
+          width: 100%;
+          flex-wrap: wrap;
+          justify-content: space-evenly;
+     }
+     .list-item-info{
+          max-width: 500px;
+          width: 100%;
+          display: flex;
+          align-items: center;
+          gap: 1rem;
+          padding: 0.5em 0.7em;
+          margin-top: 0.7em;
+     }
+     .list-item-info img{
+          width: 2.5rem;
+          border-radius: 0.4em;
+     }
+     .list-item-info .list-title{
+          font-size: 1.3rem;
+          width: 100%;
+     }
+
+
+
+</style>
+{% endblock %}
+
+{% block content %}
+
+
+<section class="search-box-container">
+     <div class="search-box">
+          <input type="text" id="search-input" placeholder="खोजें..." />
+          <button id="search-btn"><i class="bi bi-search"></i></button>
+     </div>
+
+</section>
+
+<section class="menu-item-list">
+     <div class="list-items">
+          <a href="" class="menu-item active">ALL</a>
+          <a href="" class="menu-item">Aarti</a>
+          <a href="" class="menu-item">Prathana</a>
+          <a href="" class="menu-item">Mantra</a>
+          <a href="" class="menu-item">Mantra</a>
+     </div>
+</section>
+
+
+<section class="data-list">
+
+     <div class="list-lists">
+          <a href="" class="list-item-info">
+               <img src="{% static 'bhakti/images/swami.jpeg' %}" alt="">
+               <span class="list-title">श्री हनुमान चालीसा</span>
+               <span class="icon"><i class="bi bi-chevron-right"></i></span>
+          </a>
+          <a href="" class="list-item-info">
+               <img src="{% static 'bhakti/images/swami.jpeg' %}" alt="">
+               <span class="list-title">श्री हनुमान चालीसा</span>
+               <span class="icon"><i class="bi bi-chevron-right"></i></span>
+          </a>
+          <a href="" class="list-item-info">
+               <img src="{% static 'bhakti/images/swami.jpeg' %}" alt="">
+               <span class="list-title">श्री हनुमान चालीसा</span>
+               <span class="icon"><i class="bi bi-chevron-right"></i></span>
+          </a>
+          <a href="" class="list-item-info">
+               <img src="{% static 'bhakti/images/swami.jpeg' %}" alt="">
+               <span class="list-title">श्री हनुमान चालीसा</span>
+               <span class="icon"><i class="bi bi-chevron-right"></i></span>
+          </a>
+     </div>
+     
+</section>
+
+
+
+
+
+{% endblock %}
+
+{% block footer %}
+<p>&copy; 2025 Bhakti Pravah. Crafted with <i class="bi bi-heart-fill text-danger"></i> by the team.</p>
+{% endblock %}

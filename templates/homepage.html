@@ -91,7 +91,7 @@
 
 
      .data-list{
-          margin-top: 2rem;
+          margin-top: 1.5rem;
      }
 
      .list-lists{
@@ -148,26 +148,14 @@
 <section class="data-list">
 
      <div class="list-lists">
-          <a href="" class="list-item-info">
-               <img src="{% static 'bhakti/images/swami.jpeg' %}" alt="">
-               <span class="list-title">श्री हनुमान चालीसा</span>
+          {% for info in information_list %}
+          <a href="{% url 'info' info_id=info.id %}" class="list-item-info">
+               <img src="{{ info.image.url }}" alt="">
+               <span class="list-title">{{ info.heading }}</span>
                <span class="icon"><i class="bi bi-chevron-right"></i></span>
           </a>
-          <a href="" class="list-item-info">
-               <img src="{% static 'bhakti/images/swami.jpeg' %}" alt="">
-               <span class="list-title">श्री हनुमान चालीसा</span>
-               <span class="icon"><i class="bi bi-chevron-right"></i></span>
-          </a>
-          <a href="" class="list-item-info">
-               <img src="{% static 'bhakti/images/swami.jpeg' %}" alt="">
-               <span class="list-title">श्री हनुमान चालीसा</span>
-               <span class="icon"><i class="bi bi-chevron-right"></i></span>
-          </a>
-          <a href="" class="list-item-info">
-               <img src="{% static 'bhakti/images/swami.jpeg' %}" alt="">
-               <span class="list-title">श्री हनुमान चालीसा</span>
-               <span class="icon"><i class="bi bi-chevron-right"></i></span>
-          </a>
+          {% endfor %}
+
      </div>
      
 </section>
@@ -176,8 +164,4 @@
 
 
 
-{% endblock %}
-
-{% block footer %}
-<p>&copy; 2025 Bhakti Pravah. Crafted with <i class="bi bi-heart-fill text-danger"></i> by the team.</p>
 {% endblock %}

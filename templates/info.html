@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Home - Bhakti Pravah{% endblock %}
+
+{% block css %}
+<style>
+     .info-header {
+          padding: 0.7em;
+          display: flex;
+          align-items: center;
+          gap: 1em;
+          border-bottom: 1px solid #273b4d;
+     }
+
+     .info-header .info-title {
+          font-size: 1.3em;
+     }
+
+     .info-header .back-btn {
+          font-size: 2rem;
+          color: #273b4d;
+     }
+
+     .info-info {
+          margin-top: 1rem;
+     }
+
+     .info-info img {
+          max-width: 400px;
+          width: 100%;
+          border-radius: 1rem;
+     }
+
+     .info-data-info {
+          margin-top: 1.5rem;
+     }
+
+     .info-data-info p {
+          font-size: 1.3em;
+          color: #273b4d;
+          line-height: 1.6;
+          text-align: center;
+          margin: 0.6em 0;
+          transition: font-size 0.3s ease;
+     }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<section class="info-container">
+     <div class="info-data">
+          <div class="info-header">
+               <a href="{% url 'homepage' %}" class="back-btn"><i class="bi bi-arrow-left-short"></i></a>
+               <span class="info-title">{{information.heading}}</span>
+          </div>
+
+          <div class="info-info">
+               <img src="{{ information.image.url }}" alt="">
+
+               <div class="info-data-info">
+                    {{ information.info|safe }}
+               </div>
+          </div>
+
+
+
+     </div>
+</section>
+
+
+
+
+
+{% endblock %}

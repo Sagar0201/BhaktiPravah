@@ -16,3 +16,7 @@ def homepage(request):
 def info(request,info_id):
     information = get_object_or_404(Information, id=info_id)
     return render(request, 'info.html', {'information': information})
+
+
+def counter(request):
+    return render(request, 'counter.html')

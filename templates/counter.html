@@ -1,0 +1,255 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Home - Bhakti Pravah{% endblock %}
+
+{% block css %}
+<style>
+
+     .counter-container{
+          display: flex;
+          flex-direction: column;
+          margin-top: 1rem;
+     }
+     .session-date {
+          font-size: 0.875rem;
+          text-align: center;
+          font-size: 1.3rem;
+          font-weight: 500;
+          margin: 0;
+     }
+
+
+     .counter {
+          font-size: 5rem;
+          font-weight: bold;
+          margin: 0;
+          text-align: center;
+     }
+
+     .info {
+          font-size: 1.125rem;
+          display: flex;
+          gap: 0.7rem;
+          flex-direction: row;
+     }
+     .info-parts{
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-around;
+          align-items: center;
+          gap: 0.3rem;
+     }
+
+     .info-parts p{
+          width: 100%;
+          margin: 0;
+          text-align: center;
+          font-size: 1rem;
+     }
+     .info-parts p:nth-child(1){
+          font-size: 1.3rem;
+     }
+
+     .circle-container {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          margin-top: 1.875rem;
+          gap: 1rem;
+     }
+
+     .circle {
+          background-color: #fff;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          cursor: pointer;
+          user-select: none;
+          color: #070707;
+          box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+     }
+
+     .small {
+          width: 7.5rem;
+          height: 7.5rem;
+          font-size: 2.5rem;
+          font-weight: bold;
+          border-radius: 50%;
+     }
+
+     .large {
+          width: 12.5rem;
+          height: 12.5rem;
+          font-size: 3.125rem;
+          font-weight: bold;
+          border-radius:0.7rem;
+     }
+
+     .reset-btn {
+          margin-top: 1.25rem;
+          padding: 0.625rem 1.25rem;
+          font-size: 1.125rem;
+          font-weight: bold;
+          background-color: #fff;
+          color: #070707;
+          border: none;
+          border-radius: 2rem;
+          cursor: pointer;
+          box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+     }
+
+     .history-container {
+          display: none;
+     }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<section class="counter-container">
+
+     <p class="session-date"><span id="sessionDate"></span></p>
+
+
+     <div class="counter" id="counter">0</div>
+
+     <div class="info">
+          <div class="info-parts">
+               <p>Today <span id="todayCount">0</span> </p>
+               <p>108 × <span id="rounds">0</span></p>
+          </div>
+
+          <div class="info-parts">
+               <p>Lifetime <span id="lifetimeCount">0</span></p>
+               <p>108 × <span id="lifetimeRounds">0</span></p>
+          </div>
+
+          
+     </div>
+
+     <div class="circle-container">
+          <div class="circle small" onclick="decrementCounter()">-</div>
+          <div class="circle large" onclick="incrementCounter()">+</div>
+     </div>
+
+     <button class="reset-btn" onclick="resetCounter()">Reset</button>
+
+     <audio id="beepSound" src="https://www.soundjay.com/button/beep-07.wav"></audio>
+
+</section>
+
+{% endblock %}
+
+
+{% block extra_scripts %}
+<script>
+     let todayCount = localStorage.getItem("todayCount") ? parseInt(localStorage.getItem("todayCount")) : 0;
+     let lifetimeCount = localStorage.getItem("lifetimeCount") ? parseInt(localStorage.getItem("lifetimeCount")) :
+          0;
+     let todayRounds = localStorage.getItem("todayRounds") ? parseInt(localStorage.getItem("todayRounds")) : 0;
+     let lifetimeRounds = localStorage.getItem("lifetimeRounds") ? parseInt(localStorage.getItem(
+          "lifetimeRounds")) : 0;
+     let lastSessionDate = localStorage.getItem("sessionDate");
+
+     function formatDateTime() {
+          const now = new Date();
+
+          const options = {
+               weekday: 'short',
+               year: 'numeric',
+               month: 'short',
+               day: 'numeric',
+               hour: '2-digit',
+               minute: '2-digit',
+               hour12: true
+          };
+
+          return now.toLocaleString('en-GB', options);
+     }
+
+     function getCurrentDate() {
+          return formatDateTime();
+     }
+
+     function checkNewDay() {
+          let currentDate = getCurrentDate();
+          if (lastSessionDate !== currentDate) {
+               todayCount = 0;
+               todayRounds = 0;
+               localStorage.setItem("todayCount", todayCount);
+               localStorage.setItem("todayRounds", todayRounds);
+               localStorage.setItem("sessionDate", currentDate);
+          }
+     }
+
+     function updateDisplay() {
+          document.getElementById("counter").innerText = todayCount;
+          document.getElementById("todayCount").innerText = todayCount;
+          document.getElementById("rounds").innerText = todayRounds;
+          document.getElementById("lifetimeCount").innerText = lifetimeCount;
+          document.getElementById("lifetimeRounds").innerText = lifetimeRounds;
+          document.getElementById("sessionDate").innerText = getCurrentDate();
+     }
+
+     function playBeep() {
+          document.getElementById("beepSound").play();
+     }
+
+     function vibrate() {
+          if (navigator.vibrate) {
+               navigator.vibrate(100);
+          }
+     }
+
+     function incrementCounter() {
+          checkNewDay();
+          todayCount++;
+
+          if (todayCount > 108) {
+               todayCount = 0;
+               todayRounds++;
+               lifetimeRounds++;
+          }
+
+          lifetimeCount++;
+          vibrate();
+
+          if ([11, 21, 51, 108].includes(todayCount)) {
+               playBeep();
+          }
+
+          localStorage.setItem("todayCount", todayCount);
+          localStorage.setItem("todayRounds", todayRounds);
+          localStorage.setItem("lifetimeCount", lifetimeCount);
+          localStorage.setItem("lifetimeRounds", lifetimeRounds);
+          updateDisplay();
+     }
+
+     function decrementCounter() {
+          checkNewDay();
+          if (todayCount > 0) {
+               todayCount--;
+               lifetimeCount = Math.max(0, lifetimeCount - 1);
+               vibrate();
+          }
+          localStorage.setItem("todayCount", todayCount);
+          localStorage.setItem("lifetimeCount", lifetimeCount);
+          updateDisplay();
+     }
+
+     function resetCounter() {
+          todayCount = 0;
+          todayRounds = 0;
+          localStorage.setItem("todayCount", todayCount);
+          localStorage.setItem("todayRounds", todayRounds);
+          updateDisplay();
+          vibrate();
+     }
+
+     checkNewDay();
+     updateDisplay();
+</script>
+
+{% endblock %}

@@ -159,15 +159,21 @@
      function formatDateTime() {
           const now = new Date();
           const options = {
-               weekday: 'short',
-               year: 'numeric',
-               month: 'short',
-               day: 'numeric',
-               hour: '2-digit',
-               minute: '2-digit',
-               hour12: true
+               weekday: 'short',  // 'Mon'
+               year: 'numeric',   // '2025'
+               month: 'short',     // 'Jan'
+               day: 'numeric',     // '18'
+               hour: '2-digit',    // '08'
+               minute: '2-digit',  // '30'
+               hour12: true        // 'AM/PM'
           };
-          return now.toLocaleString('en-GB', options);
+
+          // Format the current date and time
+          let formattedDate = now.toLocaleString('en-GB', options);
+
+          // Replace the comma with a dash to match your required format: "18 Jan 2025 - 08:30 AM"
+          formattedDate = formattedDate.replace(',', ' -');
+          return formattedDate;
      }
 
      function getCurrentDate() {
@@ -193,7 +199,7 @@
           document.getElementById("rounds").innerText = todayRounds;
           document.getElementById("lifetimeCount").innerText = lifetimeCount;
           document.getElementById("lifetimeRounds").innerText = lifetimeRounds;
-          document.getElementById("sessionDate").innerText = getCurrentDate();
+          document.getElementById("sessionDate").innerText = formatDateTime();
      }
 
      function playBeep() {
@@ -256,3 +262,4 @@
      updateDisplay();
 </script>
 {% endblock %}
+

@@ -6,6 +6,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('bhakti.urls')),  # Include the app's URLs
+    re_path(r'^media/(?P<path>.*)$', serve, {'document_root': production.MEDIA_ROOT}),
 ]
 # Serve media files in development
 if settings.DEBUG:

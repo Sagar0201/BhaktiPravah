@@ -10,9 +10,6 @@ def home(request):
 
 def homepage(request):
     information_list = Information.objects.only('heading', 'image','id')  
-    
-    for i in information_list:
-        print(i.image.url)
     return render(request, 'homepage.html',{'information_list': information_list})
 
 

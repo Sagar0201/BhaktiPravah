@@ -161,13 +161,10 @@ if not DEBUG:    # Tell Django to copy static assets into a path called `staticf
 
 
 
-CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': 'dszyraq0z',    # Your Cloud Name
-    'API_KEY': '278268891451493',  # Your API Key
-    'API_SECRET': 'LhHPgSd5e8NTxHExEVsBXjvBNiE',  # Your API Secret
-}
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-MEDIA_URL = 'https://res.cloudinary.com/dszyraq0z/image/upload/'
+
+# Media files (uploads)
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
 # Default primary key field type

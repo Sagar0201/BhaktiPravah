@@ -161,19 +161,14 @@ if not DEBUG:    # Tell Django to copy static assets into a path called `staticf
 
 
 
-
-# Cloudinary Configuration
 CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': 'dszyraq0z',    # Replace with your Cloudinary cloud name
-    'API_KEY': '296662716818756',          # Replace with your Cloudinary API key
-    'API_SECRET': 'Tk5iT0SiSw2otrm16QI3vjM7Y30',    # Replace with your Cloudinary API secret
+    'CLOUD_NAME': 'dszyraq0z',    # Your Cloud Name
+    'API_KEY': '278268891451493',  # Your API Key
+    'API_SECRET': 'LhHPgSd5e8NTxHExEVsBXjvBNiE',  # Your API Secret
 }
-
-# Use Cloudinary as the default file storage
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+MEDIA_URL = '/media/'  # This is used for serving media locally; Cloudinary will handle it in production
 
-# Media settings
-MEDIA_URL = '/media/'
 
 
 # Default primary key field type

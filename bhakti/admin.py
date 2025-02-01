@@ -5,5 +5,5 @@ from .models import Title
 
 admin.site.register(Category) 
 admin.site.register(Title) 
-admin.site.register(Information)  
 
+admin.site.register(Information)

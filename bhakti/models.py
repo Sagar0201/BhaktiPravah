@@ -28,3 +28,5 @@ class Information(models.Model):
 
     def __str__(self):
         return f"Information about {self.title.name} "  # String representation with category name
+    
+    

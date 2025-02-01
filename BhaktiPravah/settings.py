@@ -167,7 +167,7 @@ CLOUDINARY_STORAGE = {
     'API_SECRET': 'LhHPgSd5e8NTxHExEVsBXjvBNiE',  # Your API Secret
 }
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-MEDIA_URL = 'https://res.cloudinary.com/your-cloud-name/image/upload/'
+MEDIA_URL = 'https://res.cloudinary.com/dszyraq0z/image/upload/'
 
 
 # Default primary key field type

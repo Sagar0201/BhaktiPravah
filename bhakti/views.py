@@ -4,13 +4,13 @@ from django.shortcuts import render, get_object_or_404
 from .models import Information
 
 def home(request):
-    categories = Category.objects.all()
-    return render(request, 'home.html',{'categories': categories})  # Render home.html template
+    return render(request, 'home.html')  # Render home.html template
 
 
 def homepage(request):
-    information_list = Information.objects.only('heading', 'image','id')  
-    return render(request, 'homepage.html',{'information_list': information_list})
+    information_list = Information.objects.only('heading','id')  
+    categories = Category.objects.all()
+    return render(request, 'homepage.html',{'information_list': information_list,'categories_data': categories})
 
 
 def info(request,info_id):
@@ -20,3 +20,16 @@ def info(request,info_id):
 
 def counter(request):
     return render(request, 'counter.html')
+
+
+def categories(request,category):
+    information_list = Information.objects.filter(category__category_name=category).only('heading', 'id')
+    categories = Category.objects.all()
+        # Separate selected category
+    selected_category = categories.filter(category_name=category).first()
+    other_categories = categories.exclude(category_name=category)
+
+    # Combine selected category first, then others
+    categories = [selected_category] + list(other_categories) if selected_category else list(categories)
+
+    return render(request,'categories.html',{'information_list': information_list,'categories_data': categories,'category': category})

@@ -27,6 +27,6 @@ class Information(models.Model):
     image = models.ImageField(upload_to='upload/', null=True, blank=True)  # Image field
 
     def __str__(self):
-        return f"Information about {self.title.name} "  # String representation with category name
+        return f"{self.heading} - {self.title.name} "  # String representation with category name
     
     

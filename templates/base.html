@@ -25,12 +25,12 @@
 
 
 <style>
-
-  html,
-body {
-  padding-bottom: 6em;
-  background-color: #ebeaef;
-}
+     html,
+     body {
+          padding-bottom: 3em;
+          background-color: #ebeaef;
+          height: auto;
+     }
 
 
      /* ############################### NAVBAR ################################ */
@@ -200,7 +200,8 @@ body {
                padding-left: 1.5rem;
 
           }
-          .nav-data-2-list-item a{
+
+          .nav-data-2-list-item a {
                color: #050505;
           }
 
@@ -275,24 +276,25 @@ body {
 
 
      <!-- Bootstrap JS Bundle -->
-     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-          integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
-     </script>
+     <script src=" https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+                              integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+                              crossorigin="anonymous">
+                              </script>
 
-     <script src="{% static 'bhakti/js/script.js' %}"></script>
+                              <script src="{% static 'bhakti/js/script.js' %}"></script>
 
 
-     {% block extra_scripts %}{% endblock %}
+                              {% block extra_scripts %}{% endblock %}
 
-     <script>
-          function openSidebar() {
-               document.getElementById("nav-data-2").style.left = "0"; // Show sidebar
-          }
+                              <script>
+                                   function openSidebar() {
+                                        document.getElementById("nav-data-2").style.left = "0"; // Show sidebar
+                                   }
 
-          function closeSidebar() {
-               document.getElementById("nav-data-2").style.left = "-100%"; // Hide sidebar
-          }
-     </script>
+                                   function closeSidebar() {
+                                        document.getElementById("nav-data-2").style.left = "-100%"; // Hide sidebar
+                                   }
+                              </script>
 </body>
 
 </html>

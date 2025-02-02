@@ -202,7 +202,7 @@
      function vibrate() {
           // Vibrate (works on mobile devices)
           if (navigator.vibrate) {
-               navigator.vibrate(200);
+               navigator.vibrate(100); // Vibrate for 100ms
           }
      }
 
@@ -210,19 +210,23 @@
      increaseBtn.addEventListener('click', () => {
           counterValue++;
           updateCounter();
+          vibrate(); // Add vibration
      });
 
      decreaseBtn.addEventListener('click', () => {
           if (counterValue > 0) {
                counterValue--;
                updateCounter();
+               vibrate(); // Add vibration
           }
      });
 
      resetBtn.addEventListener('click', () => {
           counterValue = 0;
           updateCounter();
+          vibrate(); // Add vibration
      });
 </script>
+
 
 {% endblock %}

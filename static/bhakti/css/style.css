@@ -7,8 +7,9 @@
 
 html,
 body {
-  padding-bottom: 6em;
+  padding-bottom: 3em;
   background-color: #ebeaef;
+  height: auto;
 }
 
 img,

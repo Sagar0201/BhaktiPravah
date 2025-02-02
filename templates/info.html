@@ -151,7 +151,7 @@
      </div>
 </section>
 
-
+<audio id="tone" src="{% static 'bhakti/sound/tune.mp3' %}"></audio> 
 
 
 
@@ -195,7 +195,7 @@
 
      function beep() {
           // Create a beep sound (using a browser API)
-          const beep = new Audio('https://www.soundjay.com/button/beep-07.wav');
+          const beep = document.getElementById('tone');
           beep.play();
      }
 

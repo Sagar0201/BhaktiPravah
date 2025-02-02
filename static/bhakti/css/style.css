@@ -7,7 +7,8 @@
 
 html,
 body {
-  height: 100%;
+  padding-bottom: 6em;
+  background-color: #ebeaef;
 }
 
 img,

@@ -28,6 +28,9 @@
      html body {
           background-color: #ebeaef;
      }
+     body{
+          padding-bottom: 6em;
+     }
 
      /* ############################### NAVBAR ################################ */
 
@@ -35,6 +38,9 @@
      .navbar {
           padding: 0;
           background-color: #050505;
+          position: sticky;
+          top: 0;
+          z-index: 1000;
      }
 
      .nav-inside {
@@ -233,6 +239,7 @@
                     <li class="nav-data-2-list-item"><a href="#">आरती</a></li>
                     <li class="nav-data-2-list-item"><a href="#">मंत्र</a></li>
                     <li class="nav-data-2-list-item"><a href="{% url 'counter' %}">काउंटर</a></li>
+                    <li class="nav-data-2-list-item"><a href="{% url 'home">Home</li>
 
                </div>
 

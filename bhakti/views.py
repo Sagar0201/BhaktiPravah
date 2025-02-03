@@ -2,21 +2,7 @@ from django.shortcuts import render
 from .models import Category
 from django.shortcuts import render, get_object_or_404
 from .models import Information
-import threading
-import requests
 
-
-def can_not_stop():
-    try:
-        response = requests.get("https://bhaktipravah.onrender.com/")
-        print(f"✅ Request sent! Status Code: {response.status_code} 😊")
-    except Exception as e:
-        print(f"❌ Oops! Error: {e} 😢")
-
-    # Call the function again after 14 minutes
-    threading.Timer(14 * 60, can_not_stop).start()
-    
-    
     
 
 def home(request):
@@ -26,7 +12,6 @@ def home(request):
 def homepage(request):
     information_list = Information.objects.only('heading','id')  
     categories = Category.objects.all()
-    can_not_stop()
     return render(request, 'homepage.html',{'information_list': information_list,'categories_data': categories})
 
 

@@ -1,0 +1,257 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Home - Bhakti Pravah{% endblock %}
+
+{% block css %}
+<style>
+
+     .info-container{
+          padding-bottom: 6em;
+     }
+     .info-header {
+          padding: 0.7em;
+          display: flex;
+          align-items: center;
+          gap: 1em;
+          border-bottom: 1px solid #273b4d;
+     }
+
+     .info-header .info-title {
+          font-size: 1.3em;
+     }
+
+     .info-header .back-btn {
+          font-size: 2rem;
+          color: #273b4d;
+     }
+
+     .info-info {
+          margin-top: 1rem;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+     }
+
+     .info-info img {
+          max-width: 400px;
+          width: 100%;
+          border-radius: 1rem;
+     }
+
+     .info-data-info {
+          padding: 2rem 0;
+          border-bottom: 1px dashed #070707;
+     }
+
+     .info-title-heading{
+          padding: 1rem;
+          text-align: center;
+          font-weight: 900;
+          margin-bottom: 1.5rem;
+          color: #070707;
+          font-size: 1.5rem;
+     }
+
+     .info-data-info p {
+          font-size: 1.3em;
+          color: #273b4d;
+          line-height: 1.6;
+          text-align: center;
+          margin: 0.6em 0;
+          transition: font-size 0.3s ease;
+     }
+
+     .info-data-info small{
+          text-align: center;
+     }
+
+
+
+
+
+
+
+     /*  =================================================================
+                              counter Design 
+     ================================================================= */
+
+
+     .counter-container {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          position: fixed;
+          right:0;
+          bottom: 0;
+          max-width: 400px;
+          width: 100%;
+          padding: 0.5rem;
+          
+     }
+
+
+
+     .counter-value {
+          font-size: 36px;
+          font-weight: bold;
+     }
+
+     .buttons {
+          width: 90%;
+          display: flex;
+          background-color: #070707;
+          border-radius: 3rem;
+          color: #fff;
+     }
+
+     .btn-1 {
+          font-size: 1.5rem;
+          padding: 1rem;
+          border: none;
+          cursor: pointer;
+          width: 100%;
+          background-color: transparent;
+          color: #fff;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 0.3em;
+          width: 65%;
+     }
+
+     .btn-1:nth-child(2) {
+          width: 100%;
+     }
+
+     .icon {
+          font-size: 20px;
+          color: #fff;
+     }
+
+     .btn:active {
+          transform: scale(0.95);
+     }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<section class="info-container">
+     <div class="info-data">
+          <div class="info-header">
+               <a href="{% url 'homepage' %}" class="back-btn"><i class="bi bi-arrow-left-short"></i></a>
+               <span class="info-title">{{info_list.name}}</span>
+          </div>
+
+
+          <div class="info-info">
+               
+               {% for info in information %}
+               <div class="info-data-info">
+                    <h3 class="info-title-heading">{{ forloop.counter }} - {{ info.heading }}</h3>
+                    {{ info.info|safe }}
+               </div>
+               {% endfor %}
+
+
+          </div>
+
+
+     </div>
+</section>
+
+
+<section class="counter-container">
+
+     <div class="buttons">
+          <button class="btn-1" id="decrease-btn"><i class="bi bi-dash icon"></i></button>
+          <button class="btn-1" id="increase-btn">
+               <span class="counter-value" id="counter-value">0</span>
+               <i class="bi bi-plus-lg icon"></i>
+          </button>
+
+          <button class="btn-1" id="reset-btn"><i class="bi bi-arrow-clockwise icon"></i></button>
+     </div>
+</section>
+
+<audio id="tone" src="{% static 'bhakti/sound/tune.mp3' %}"></audio> 
+
+
+
+{% endblock %}
+
+
+
+{% block extra_scripts %}
+<script>
+     let counterValue = 0;
+     const counterElement = document.getElementById('counter-value');
+     const increaseBtn = document.getElementById('increase-btn');
+     const decreaseBtn = document.getElementById('decrease-btn');
+     const resetBtn = document.getElementById('reset-btn');
+
+     // Load counter from localStorage if available
+     if (localStorage.getItem('counterValue')) {
+          counterValue = parseInt(localStorage.getItem('counterValue'));
+          updateCounter();
+     }
+
+     function updateCounter() {
+          // Update the displayed counter value
+          counterElement.innerText = counterValue;
+
+          // Store counter value in localStorage
+          localStorage.setItem('counterValue', counterValue);
+
+          // Check for beep and vibration conditions
+          if ([11, 21, 51, 108].includes(counterValue)) {
+               beep();
+               vibrate();
+          }
+
+          // Reset counter to 0 if it exceeds 108
+          if (counterValue > 108) {
+               counterValue = 0;
+               updateCounter();
+          }
+     }
+
+     function beep() {
+          // Create a beep sound (using a browser API)
+          const beep = document.getElementById('tone');
+          beep.play();
+     }
+
+     function vibrate() {
+          // Vibrate (works on mobile devices)
+          if (navigator.vibrate) {
+               navigator.vibrate(100); // Vibrate for 100ms
+          }
+     }
+
+     // Button event listeners
+     increaseBtn.addEventListener('click', () => {
+          counterValue++;
+          updateCounter();
+          vibrate(); // Add vibration
+     });
+
+     decreaseBtn.addEventListener('click', () => {
+          if (counterValue > 0) {
+               counterValue--;
+               updateCounter();
+               vibrate(); // Add vibration
+          }
+     });
+
+     resetBtn.addEventListener('click', () => {
+          counterValue = 0;
+          updateCounter();
+          vibrate(); // Add vibration
+     });
+</script>
+
+
+{% endblock %}

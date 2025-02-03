@@ -11,5 +11,4 @@ python manage.py collectstatic --no-input
 # Apply any outstanding database migrations
 python manage.py migrate
 
-# Start a background process to ping the website every 14 minutes
-nohup bash -c 'while true; do curl -s https://bhaktipravah.onrender.com/ > /dev/null; sleep 840; done' &
+nohup bash -c 'while true; do curl -s https://bhaktipravah.onrender.com/ > /dev/null; sleep 600; done' &

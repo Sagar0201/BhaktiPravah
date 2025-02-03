@@ -30,3 +30,17 @@ class Information(models.Model):
         return f"{self.heading} - {self.title.name} "  # String representation with category name
     
     
+
+
+class InfoList(models.Model):
+    name = models.CharField(max_length=200)
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+    # Link info list to multiple Information objects
+    information = models.ManyToManyField(Information, related_name='info_lists', blank=True)
+
+    class Meta:
+        ordering = ['-created_at']  # Newest info lists first
+
+    def __str__(self):
+        return self.name

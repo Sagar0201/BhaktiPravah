@@ -242,8 +242,12 @@
                     <li class="nav-data-2-list-item"><a href="{% url 'categories' category=cat.category_name %}">{{cat.category_name}}</a></li>
                     {% endfor %}
 
+                    {% for list in info_lists %}
+                    <li class="nav-data-2-list-item"><a href="{% url 'info_list_detail' list.id %}">{{ list.name }}</a></li>
+                    {% endfor %}
+
                     <li class="nav-data-2-list-item"><a href="{% url 'counter' %}">काउंटर</a></li>
-                    <li class="nav-data-2-list-item"><a href="{% url 'home' %}">Home</a></li>
+                    <li class="nav-data-2-list-item"><a href="{% url 'home' %}">मुख्यपृष्ठ</a></li>
 
                </div>
 

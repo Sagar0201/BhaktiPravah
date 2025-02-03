@@ -71,6 +71,8 @@ TEMPLATES = [
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
                 'bhakti.context_processors.categories',
+                'bhakti.context_processors.info_lists',
+                
             ],
         },
     },

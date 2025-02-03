@@ -10,7 +10,7 @@ def can_not_stop():
     
     requests.get("https://bhaktipravah.onrender.com/")
     print('hii')
-    threading.Timer(14 * 60, my_function).start()
+    threading.Timer(14 * 60, can_not_stop).start()
     
     
     

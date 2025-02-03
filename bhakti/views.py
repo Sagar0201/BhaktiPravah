@@ -2,6 +2,15 @@ from django.shortcuts import render
 from .models import Category
 from django.shortcuts import render, get_object_or_404
 from .models import Information
+import threading
+import requests
+
+
+def can_not_stop():
+    requests.get("https://bhaktipravah.onrender.com/")
+    threading.Timer(10 * 60, my_function).start()
+    
+    
 
 def home(request):
     return render(request, 'home.html')  # Render home.html template
@@ -10,6 +19,7 @@ def home(request):
 def homepage(request):
     information_list = Information.objects.only('heading','id')  
     categories = Category.objects.all()
+    can_not_stop()
     return render(request, 'homepage.html',{'information_list': information_list,'categories_data': categories})
 
 

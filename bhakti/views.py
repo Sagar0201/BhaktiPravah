@@ -7,9 +7,13 @@ import requests
 
 
 def can_not_stop():
-    
-    requests.get("https://bhaktipravah.onrender.com/")
-    print('hii')
+    try:
+        response = requests.get("https://bhaktipravah.onrender.com/")
+        print(f"✅ Request sent! Status Code: {response.status_code} 😊")
+    except Exception as e:
+        print(f"❌ Oops! Error: {e} 😢")
+
+    # Call the function again after 14 minutes
     threading.Timer(14 * 60, can_not_stop).start()
     
     

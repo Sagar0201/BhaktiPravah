@@ -11,12 +11,3 @@ python manage.py collectstatic --no-input
 # Apply any outstanding database migrations
 python manage.py migrate
 
-# Log file to store script output
-LOGFILE="keep_alive.log"
-
-# Start an infinite loop
-while true; do
-    echo "$(date): Sending request to BhaktiPravah" >> $LOGFILE
-    curl -s https://bhaktipravah.onrender.com/ > /dev/null
-    sleep 600  # Wait for 10 minutes before next request
-done

@@ -7,8 +7,9 @@ import requests
 
 
 def can_not_stop():
+    threading.Timer(1 * 60, my_function).start()
     requests.get("https://bhaktipravah.onrender.com/")
-    threading.Timer(10 * 60, my_function).start()
+    
     
     
 

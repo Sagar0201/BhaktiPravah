@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from .models import Category
 from django.shortcuts import render, get_object_or_404
-from .models import Information,InfoList
+from .models import Information,InfoList,InfoListItem
 
     
 
@@ -40,6 +40,7 @@ def categories(request,category):
 
 
 def info_list_detail(request, info_list_id):
+    print(info_list_id)
     info_list = InfoList.objects.get(id=info_list_id)  # Fetch the info list by ID
-    information = info_list.information.all()  # Get all Information objects in this info list
+    information = InfoListItem.objects.filter(info_list=info_list)
     return render(request, 'info_list_detail.html', {'info_list': info_list, 'information': information})

@@ -3,8 +3,6 @@ from django.db import models
 class Category(models.Model):
     category_name = models.CharField(max_length=100, unique=True)  # Ensure category names are unique
 
-    class Meta:
-        ordering = ['category_name']  # Automatically sort by category name in ascending order
 
     def __str__(self):
         return self.category_name  # Return the category name as its string representation
@@ -13,8 +11,6 @@ class Category(models.Model):
 class Title(models.Model):
     name = models.CharField(max_length=255, unique=True)  # Ensure the title name is unique
 
-    class Meta:
-        ordering = ['name']  # Automatically sort by the name field in ascending order
 
     def __str__(self):
         return self.name  # String representation of the title
@@ -33,16 +29,34 @@ class Information(models.Model):
 
 
 class InfoList(models.Model):
-    name = models.CharField(max_length=200)
+    name = models.CharField(max_length=200, unique=True)  # Name of the InfoList
     created_at = models.DateTimeField(auto_now_add=True)
-    
-    # Link info list to multiple Information objects
-    information = models.ManyToManyField(Information, related_name='info_lists', blank=True)
-    
 
+    def add_information(self, information):
+        """
+        Add an Information object to the InfoList, maintaining the order.
+        """
+        # Get the highest order number in the list
+        last_item = self.items.order_by('-order_number').first()
+        new_order = (last_item.order_number + 1) if last_item else 1
+
+        # Create and save the new InfoListItem
+        InfoListItem.objects.create(info_list=self, information=information, order_number=new_order)
 
     def __str__(self):
         return self.name
+    
+    
+    
 
-    
-    
+class InfoListItem(models.Model):
+    info_list = models.ForeignKey(InfoList, on_delete=models.CASCADE, related_name='items')
+    information = models.ForeignKey('Information', on_delete=models.CASCADE)
+    order_number = models.PositiveIntegerField()
+
+    class Meta:
+        ordering = ['order_number']  # Ensure InfoListItems are retrieved in order
+
+    def __str__(self):
+        return f"{self.info_list.name} - {self.information.heading} (Order {self.order_number})"
+

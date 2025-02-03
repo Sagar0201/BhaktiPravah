@@ -150,8 +150,8 @@
                
                {% for info in information %}
                <div class="info-data-info">
-                    <h3 class="info-title-heading">{{ forloop.counter }} - {{ info.heading }}</h3>
-                    {{ info.info|safe }}
+                    <h3 class="info-title-heading">{{ forloop.counter }}-{{ info.information.heading }}</h3>
+                    {{ info.information.info|safe }}
                </div>
                {% endfor %}
 

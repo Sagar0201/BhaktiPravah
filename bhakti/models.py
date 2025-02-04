@@ -3,6 +3,9 @@ from django.db import models
 class Category(models.Model):
     category_name = models.CharField(max_length=100, unique=True)  # Ensure category names are unique
 
+    class Meta:
+        ordering = ['category_name']  # Default ordering by category_name in ascending order
+
 
     def __str__(self):
         return self.category_name  # Return the category name as its string representation
@@ -11,6 +14,8 @@ class Category(models.Model):
 class Title(models.Model):
     name = models.CharField(max_length=255, unique=True)  # Ensure the title name is unique
 
+    class Meta:
+        ordering = ['name']
 
     def __str__(self):
         return self.name  # String representation of the title

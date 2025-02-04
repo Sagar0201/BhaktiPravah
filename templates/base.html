@@ -311,8 +311,6 @@
 
                     <li class="nav-data-2-list-item"><a href="{% url 'counter' %}">काउंटर</a></li>
                     <li class="nav-data-2-list-item"><a href="{% url 'home' %}">मुख्यपृष्ठ</a></li>
-                    <button onclick="speakText()">📢 वाचा</button>
-                    <button onclick="stopSpeech()">⏹ थांबा</button>
 
                </div>
 
@@ -383,82 +381,8 @@
           }
 
 
-
-          /*----------------------------------------------------------------
-                                   Read Text Area                          
-          ----------------------------------------------------------------*/
-
-
-          let speechInstance = null; // Store the current speech instance
-
-          function getVoices() {
-               return new Promise(resolve => {
-                    let voices = speechSynthesis.getVoices();
-                    if (voices.length) {
-                         resolve(voices);
-                         return;
-                    }
-                    speechSynthesis.onvoiceschanged = () => {
-                         resolve(speechSynthesis.getVoices());
-                    };
-               });
-          }
-
-          async function speakText() {
-               stopSpeech(); // Stop any ongoing speech
-
-               let divs = document.querySelectorAll(".info-info"); // ✅ Get all elements
-               if (divs.length === 0) {
-                    console.warn("⚠ No .info-info elements found!");
-                    return;
-               }
-
-               let textToSpeak = Array.from(divs).map(div => div.innerText.trim()).join(
-               ". "); // ✅ Combine all text into one speech request
-
-               let voices = await getVoices();
-               let language = divs[0].getAttribute("lang") || "mr-IN";
-
-               if (language === "sa") language = "hi-IN";
-               if (language === "mr") language = "mr-IN";
-
-               let speech = new SpeechSynthesisUtterance(textToSpeak);
-               let voice = voices.find(v => v.lang.startsWith(language)) || voices.find(v => v.lang.startsWith(
-                    "hi-IN"));
-
-               if (voice) {
-                    speech.voice = voice;
-               } else {
-                    console.warn("⚠ No suitable voice found. Using default.");
-               }
-
-               speech.lang = language;
-               speech.rate = 1;
-               speech.pitch = 1;
-
-               // Ensure the speech doesn't get cut off
-               speech.onend = () => {
-                    console.log("✅ Speech finished.");
-                    speechInstance = null;
-               };
-
-               speech.onerror = (event) => {
-                    console.error("❌ Speech error:", event);
-               };
-
-               speechInstance = speech;
-               window.speechSynthesis.speak(speech); // ✅ Speak everything at once
-          }
-
-          function stopSpeech() {
-               if (speechInstance) {
-                    window.speechSynthesis.cancel();
-                    console.log("⏹ Speech stopped.");
-                    speechInstance = null;
-               }
-          }
      </script>
-
+     
 </body>
 
 </html>

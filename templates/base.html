@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="mr">
 
 <head>
      {% load static %}
@@ -40,12 +40,14 @@
      .navbar {
           padding: 0;
           background-color: #050505;
-          position: fixed; /* This keeps it fixed at the top */
+          position: fixed;
+          /* This keeps it fixed at the top */
           top: 0;
           left: 0;
           width: 100%;
           z-index: 1000;
-          box-sizing: border-box; /* To account for padding */
+          box-sizing: border-box;
+          /* To account for padding */
      }
 
      .nav-inside {
@@ -309,6 +311,7 @@
 
                     <li class="nav-data-2-list-item"><a href="{% url 'counter' %}">काउंटर</a></li>
                     <li class="nav-data-2-list-item"><a href="{% url 'home' %}">मुख्यपृष्ठ</a></li>
+                    <button onclick="speakText()">📢 वाचा</button>
 
                </div>
 
@@ -376,6 +379,28 @@
 
           function closeSidebar() {
                document.getElementById("nav-data-2").style.left = "-100%"; // Hide sidebar
+          }
+
+
+
+          /*----------------------------------------------------------------
+                                   Read Text Area                          
+          ----------------------------------------------------------------*/
+          function speakText() {
+               let divs = document.querySelectorAll(".info-info"); // सर्व `.info-info` असलेले div मिळवा
+
+               divs.forEach(div => {
+                    let textToSpeak = div.innerText.trim(); // संपूर्ण div मधील मजकूर घ्या
+                    let language = div.getAttribute("lang") || "mr-IN"; // डिफॉल्ट भाषा मराठी
+
+                    let speech = new SpeechSynthesisUtterance(textToSpeak);
+                    speech.lang = (language === "sa") ? "hi-IN" : language +
+                    "-IN"; // संस्कृतसाठी `hi-IN` वापरतो
+                    speech.rate = 1;
+                    speech.pitch = 1;
+
+                    window.speechSynthesis.speak(speech);
+               });
           }
      </script>
 </body>

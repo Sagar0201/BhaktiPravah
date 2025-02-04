@@ -74,6 +74,7 @@
           border-radius: 0.5em;
           color: #070707;
           font-size: 0.9em;
+          min-width: fit-content;
      }
 
      .list-items .active {
@@ -141,6 +142,10 @@
                class="menu-item {% if cat.category_name == category %}active{% endif %}">
                {{ cat.category_name }}
           </a>
+          {% endfor %}
+
+          {% for list in info_lists %}
+          <a href="{% url 'info_list_detail' list.id %}" class="menu-item">{{ list.name }}</a>
           {% endfor %}
      </div>
 </section>

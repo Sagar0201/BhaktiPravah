@@ -30,6 +30,7 @@
           padding-bottom: 3em;
           background-color: #ebeaef;
           height: 100%;
+          padding-top: 2.7rem;
      }
 
 
@@ -39,9 +40,12 @@
      .navbar {
           padding: 0;
           background-color: #050505;
-          position: sticky;
+          position: fixed; /* This keeps it fixed at the top */
           top: 0;
+          left: 0;
+          width: 100%;
           z-index: 1000;
+          box-sizing: border-box; /* To account for padding */
      }
 
      .nav-inside {
@@ -190,19 +194,23 @@
 
           .nav-data-2-heading-info {
                display: flex;
+               margin-bottom: 2rem;
+               margin-top: 0;
+               padding: 1rem 1.5rem;
           }
 
           .nav-data-2-list-item {
                width: 100%;
-               padding: 0.2em;
                margin: 0;
-               margin-top: 0.2rem;
-               padding-left: 1.5rem;
-
+               display: block;
           }
 
           .nav-data-2-list-item a {
                color: #050505;
+               width: 100%;
+               display: block;
+               font-size: 1.1rem;
+               padding: 0.5rem 2rem;
           }
 
           .nav-data-3-btn-1 {
@@ -232,7 +240,7 @@
           .spinner {
                border: 8px solid #f3f3f3;
                /* Light gray color */
-               border-top: 8px solid #3498db;
+               border-top: 8px solid #050505;
                /* Blue color for spinning effect */
                border-radius: 50%;
                width: 50px;

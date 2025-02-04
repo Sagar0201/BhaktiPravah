@@ -5,8 +5,6 @@
 
 {% block css %}
 <style>
-     
-
      /* =================================================================
                               # SEARCH BOX
      * ================================================================= */
@@ -55,11 +53,11 @@
                             # Menu List
      * ================================================================= */
 
-     .menu-item-list{
+     .menu-item-list {
           margin-top: 1rem;
      }
 
-     .list-items{
+     .list-items {
           width: 100%;
           display: flex;
           flex-direction: row;
@@ -69,39 +67,41 @@
           scrollbar-width: none;
      }
 
-     .list-items a{
+     .list-items a {
           padding: 0.2em 1.5em;
           font-size: 1rem;
           background-color: #ffffff8e;
           border-radius: 0.5em;
           color: #070707;
           font-size: 0.9em;
+          min-width: fit-content;
      }
 
-     .list-items .active{
+     .list-items .active {
           background-color: #070707;
           color: #fff;
      }
 
 
-     
+
      /* =================================================================
                             # Menu List
      * ================================================================= */
 
 
-     .data-list{
+     .data-list {
           margin-top: 1.5rem;
           padding-bottom: 3em;
      }
 
-     .list-lists{
+     .list-lists {
           display: flex;
           width: 100%;
           flex-wrap: wrap;
           justify-content: space-evenly;
      }
-     .list-item-info{
+
+     .list-item-info {
           max-width: 500px;
           width: 100%;
           display: flex;
@@ -110,17 +110,16 @@
           padding: 0.5em 0.7em;
           margin-top: 0.7em;
      }
-     .list-item-info img{
+
+     .list-item-info img {
           width: 2.5rem;
           border-radius: 0.4em;
      }
-     .list-item-info .list-title{
+
+     .list-item-info .list-title {
           font-size: 1.3rem;
           width: 100%;
      }
-
-
-
 </style>
 {% endblock %}
 
@@ -138,9 +137,14 @@
 <section class="menu-item-list">
      <div class="list-items">
           <a href="" class="menu-item active">सर्व</a>
+
           {% for cat in categories_data %}
           <a href="{% url 'categories' category=cat.category_name %}" class="menu-item">{{cat.category_name}}</a>
-          {% endfor %}        
+          {% endfor %}
+
+          {% for list in info_lists %}
+          <a href="{% url 'info_list_detail' list.id %}" class="menu-item">{{ list.name }}</a>
+          {% endfor %}
      </div>
 </section>
 
@@ -150,14 +154,14 @@
      <div class="list-lists">
           {% for info in information_list %}
           <a href="{% url 'info' info_id=info.id %}" class="list-item-info">
-               
+
                <span class="list-title">{{ info.heading }}</span>
                <span class="icon"><i class="bi bi-chevron-right"></i></span>
           </a>
           {% endfor %}
 
      </div>
-     
+
 </section>
 
 

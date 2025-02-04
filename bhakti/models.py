@@ -24,6 +24,10 @@ class Information(models.Model):
 
     def __str__(self):
         return f"{self.heading} - {self.title.name} "  # String representation with category name
+
+
+    class Meta:
+        ordering = ['category__category_name', 'title__name', 'heading']  # Sorting by category, title, and then heading
     
     
 

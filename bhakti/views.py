@@ -10,10 +10,26 @@ def home(request):
 
 
 def homepage(request):
-    information_list = Information.objects.only('heading','id')  
-    categories = Category.objects.all()
-    return render(request, 'homepage.html',{'information_list': information_list,'categories_data': categories})
+    # Get the search query from the GET request
+    query = request.GET.get('query', '')
 
+    # If there's a query, filter the Information objects
+    if query:
+        information_list = Information.objects.filter(
+            heading__icontains=query  # Case-insensitive search on heading
+        ).only('heading', 'id')
+    else:
+        information_list = Information.objects.only('heading', 'id')  # All information if no query
+
+    categories = Category.objects.all()
+
+    return render(request, 'homepage.html', {
+        'information_list': information_list,
+        'categories_data': categories,
+        'query': query  # Pass the query back to the template for the search box
+    })
+    
+    
 
 def info(request,info_id):
     information = get_object_or_404(Information, id=info_id)

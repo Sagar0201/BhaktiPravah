@@ -127,10 +127,10 @@
 
 
 <section class="search-box-container">
-     <div class="search-box">
-          <input type="text" id="search-input" placeholder="शोधा..." />
-          <button id="search-btn"><i class="bi bi-search"></i></button>
-     </div>
+     <form class="search-box" method="GET" action="{% url 'homepage' %}">
+          <input type="text" name="query" id="search-input" placeholder="शोधा..." value="{{ request.GET.query }}" />
+          <button type="submit" id="search-btn"><i class="bi bi-search"></i></button>
+     </form>
 
 </section>
 
@@ -150,19 +150,20 @@
 
 
 <section class="data-list">
-
      <div class="list-lists">
+          {% if information_list %}
           {% for info in information_list %}
           <a href="{% url 'info' info_id=info.id %}" class="list-item-info">
-
                <span class="list-title">{{ info.heading }}</span>
                <span class="icon"><i class="bi bi-chevron-right"></i></span>
           </a>
           {% endfor %}
-
+          {% else %}
+          <p>No results found for "{{ query }}"</p>
+          {% endif %}
      </div>
-
 </section>
+
 
 
 

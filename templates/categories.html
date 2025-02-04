@@ -127,10 +127,10 @@
 
 
 <section class="search-box-container">
-     <div class="search-box">
-          <input type="text" id="search-input" placeholder="शोधा..." />
-          <button id="search-btn"><i class="bi bi-search"></i></button>
-     </div>
+     <form class="search-box" method="GET" action="{% url 'homepage' %}">
+          <input type="text" name="query" id="search-input" placeholder="शोधा..." value="{{ request.GET.query }}" />
+          <button type="submit" id="search-btn"><i class="bi bi-search"></i></button>
+     </form>
 
 </section>
 

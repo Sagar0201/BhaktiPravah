@@ -13,11 +13,17 @@ def homepage(request):
     # Get the search query from the GET request
     query = request.GET.get('query', '')
 
-    # If there's a query, filter the Information objects
+    # If there's a query, filter the Information objects across all fields
     if query:
         information_list = Information.objects.filter(
             heading__icontains=query  # Case-insensitive search on heading
-        ).only('heading', 'id')
+        ).exclude(info__icontains=query)  # Exclude results where 'info' field contains the query
+        information_list = information_list | Information.objects.filter(
+            info__icontains=query  # Case-insensitive search on info
+        )
+        information_list = information_list | Information.objects.filter(
+            category__category_name__icontains=query  # Search the category name as well
+        )
     else:
         information_list = Information.objects.only('heading', 'id')  # All information if no query
 
@@ -28,8 +34,6 @@ def homepage(request):
         'categories_data': categories,
         'query': query  # Pass the query back to the template for the search box
     })
-    
-    
 
 def info(request,info_id):
     information = get_object_or_404(Information, id=info_id)

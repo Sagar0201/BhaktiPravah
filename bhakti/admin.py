@@ -40,8 +40,17 @@ class InfoListAdmin(admin.ModelAdmin):
     list_display = ('name', 'created_at')
     inlines = [InfoListItemInline]  # Show items in InfoList admin
 
+class InfoListItemAdmin(admin.ModelAdmin):
+    list_display = ('info_list', 'category_name', 'order_number', 'information')
+    ordering = ['information__category__category_name', 'order_number']  # Ensure admin follows custom ordering
+
+    def category_name(self, obj):
+        return obj.information.category.category_name
+    category_name.admin_order_field = 'information__category__category_name'
+    category_name.short_description = "Category"
+
 admin.site.register(Category)
 admin.site.register(Title)
 admin.site.register(Information, InformationAdmin)
 admin.site.register(InfoList, InfoListAdmin)
-admin.site.register(InfoListItem)
+admin.site.register(InfoListItem, InfoListItemAdmin)

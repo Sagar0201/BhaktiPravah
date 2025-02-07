@@ -156,13 +156,16 @@
      <div class="list-lists">
           {% for info in information_list %}
 
-          {% if info.image_data %}
+          
+          
+          <a href="{% url 'info' info_id=info.id %}" class="list-item-info">
+
+               {% if info.image_data %}
                <img src="data:image/jpeg;base64,{{ info.get_image_base64 }}" width="200">
                {% else %}
                <img src="{% static 'bhakti/images/no_img.jpeg' %}" alt="">
           {% endif %}
-          
-          <a href="{% url 'info' info_id=info.id %}" class="list-item-info">
+               
                <span class="list-title">{{ info.heading }}</span>
                <span class="icon"><i class="bi bi-chevron-right"></i></span>
           </a>

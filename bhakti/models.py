@@ -68,7 +68,7 @@ class InfoListItem(models.Model):
     order_number = models.PositiveIntegerField()
 
     class Meta:
-        ordering = ['order_number']
+        ordering = ['information__category__category_name', 'order_number']  # Order by Category name, then order number
 
     def __str__(self):
-        return f"{self.info_list.name} - {self.information.heading} (Order {self.order_number})"
+        return f"{self.information.category.category_name} Order {self.order_number} - {self.information.heading}"

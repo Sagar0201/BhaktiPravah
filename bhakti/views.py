@@ -25,7 +25,7 @@ def homepage(request):
             category__category_name__icontains=query  # Search the category name as well
         )
     else:
-        information_list = Information.objects.only('heading', 'id')  # All information if no query
+        information_list = Information.objects.only('heading', 'id','image_data')  # All information if no query
 
     categories = Category.objects.all()
 

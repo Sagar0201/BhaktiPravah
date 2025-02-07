@@ -45,7 +45,7 @@ def counter(request):
 
 
 def categories(request,category):
-    information_list = Information.objects.filter(category__category_name=category).only('heading', 'id')
+    information_list = Information.objects.filter(category__category_name=category).only('heading', 'id','image_data')
     categories = Category.objects.all()
         # Separate selected category
     selected_category = categories.filter(category_name=category).first()

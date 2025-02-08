@@ -52,9 +52,7 @@ class InfoList(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def add_information(self, information):
-        """
-        Add an Information object to the InfoList, maintaining the order.
-        """
+        """Add an Information object to the InfoList, maintaining the order."""
         last_item = self.items.order_by('-order_number').first()
         new_order = (last_item.order_number + 1) if last_item else 1
         InfoListItem.objects.create(info_list=self, information=information, order_number=new_order)
@@ -68,7 +66,7 @@ class InfoListItem(models.Model):
     order_number = models.PositiveIntegerField()
 
     class Meta:
-        ordering = ['info_list__name' 'order_number']  # Order by Category name, then order number
+        ordering = ['info_list__name', 'order_number']  # Order by InfoList name, then order number
 
     def __str__(self):
-        return f"{self.information.category.category_name} Order {self.order_number} - {self.information.heading}"
+        return f"{self.info_list.name} {self.order_number} - {self.information.heading}"

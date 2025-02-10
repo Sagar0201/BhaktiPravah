@@ -2,8 +2,8 @@ from django.shortcuts import render
 from .models import Category
 from django.shortcuts import render, get_object_or_404
 from .models import Information,InfoList,InfoListItem
+from django.http import JsonResponse
 
-    
 
 def home(request):
     return render(request, 'home.html')  # Render home.html template
@@ -64,3 +64,23 @@ def info_list_detail(request, info_list_id):
     info_list = InfoList.objects.get(id=info_list_id)  # Fetch the info list by ID
     information = InfoListItem.objects.filter(info_list=info_list)
     return render(request, 'info_list_detail.html', {'info_list': info_list, 'information': information})
+
+
+
+
+# ######################################## for APP ########################################
+
+
+
+
+def export_data(request):
+    """ Fetch all data for offline storage """
+    info_data = list(Information.objects.values())
+    info_list_data = list(InfoList.objects.values())
+    info_list_items_data = list(InfoListItem.objects.values())
+
+    return JsonResponse({
+        "information": info_data,
+        "info_lists": info_list_data,
+        "info_list_items": info_list_items_data,
+    }, safe=False)

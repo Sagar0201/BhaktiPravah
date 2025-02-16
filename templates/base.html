@@ -5,6 +5,7 @@
      {% load static %}
      <link rel="manifest" href="{% static 'manifest.json' %}">
 
+
      <meta charset="UTF-8">
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <title>{% block title %}Bhakti Pravah{% endblock %}</title>
@@ -315,7 +316,10 @@
 
                     <li class="nav-data-2-list-item"><a href="{% url 'counter' %}">काउंटर</a></li>
                     <li class="nav-data-2-list-item"><a href="{% url 'home' %}">मुख्यपृष्ठ</a></li>
-                    <button id="install-btn" onclick="installPWA()" style="display: none;">Install App</button>
+
+                    <button id="install-button" style="display: none;">Install App</button>
+
+
 
 
                </div>
@@ -355,16 +359,7 @@
           integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
      </script>
 
-     <script src="{% static 'js/script.js' %}"></script>
-
-
-     <script>
-          if ('serviceWorker' in navigator) {
-               navigator.serviceWorker.register("{% static 'service-worker.js' %}")
-                    .then(reg => console.log("Service Worker Registered", reg))
-                    .catch(err => console.log("Service Worker Registration Failed", err));
-          }
-     </script>
+     <script src="{% static 'js/app.js' %}"></script>
 
 
      <script>

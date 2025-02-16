@@ -1,10 +1,6 @@
 {
-     "name": "BhaktiPravah",
      "short_name": "BhaktiPravah",
-     "start_url": "/",
-     "display": "standalone",
-     "background_color": "#ffffff",
-     "theme_color": "#ff6600",
+     "name": "Bhakti Pravah PWA",
      "icons": [{
                "src": "/static/icons/icon-192x192.png",
                "sizes": "192x192",
@@ -15,5 +11,9 @@
                "sizes": "512x512",
                "type": "image/png"
           }
-     ]
+     ],
+     "start_url": "/",
+     "display": "standalone",
+     "theme_color": "#ffffff",
+     "background_color": "#ffffff"
 }

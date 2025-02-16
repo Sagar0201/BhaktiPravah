@@ -1,0 +1,6 @@
+activate env -- venv\Scripts\activate
+run server -- python manage.py runserver
+server -- http://127.0.0.1:8000
+requirements - pip freeze > requirements.txt
+pass  12345 id - admin
+

@@ -1,0 +1,182 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Home - Bhakti Pravah{% endblock %}
+
+{% block css %}
+<style>
+     /* =================================================================
+                              # SEARCH BOX
+     * ================================================================= */
+
+     .search-box-container {
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-top: 1.5rem;
+     }
+
+     .search-box {
+          width: 100%;
+          display: flex;
+          border-radius: 0.2em;
+          background-color: #ffffff;
+
+     }
+
+
+     .search-box input {
+          flex: 1;
+          border: none;
+          outline: none;
+          background: transparent;
+          padding: 0.7rem;
+          font-size: 1rem;
+          padding-left: 1.2rem;
+     }
+
+     .search-box button {
+          border: none;
+          background: none;
+          cursor: pointer;
+          font-size: 1rem;
+          color: #444;
+          padding: 0.5em;
+          border-radius: 0 1.3rem 1.3rem 0;
+          margin-right: 0.6em;
+     }
+
+
+
+     /* =================================================================
+                            # Menu List
+     * ================================================================= */
+
+     .menu-item-list {
+          margin-top: 1rem;
+     }
+
+     .list-items {
+          width: 100%;
+          display: flex;
+          flex-direction: row;
+          gap: 1rem;
+          overflow-x: auto;
+          padding: 0.3em;
+          scrollbar-width: none;
+     }
+
+     .list-items a {
+          padding: 0.2em 1.5em;
+          font-size: 1rem;
+          background-color: #ffffff8e;
+          border-radius: 0.5em;
+          color: #070707;
+          font-size: 0.9em;
+          min-width: fit-content;
+     }
+
+     .list-items .active {
+          background-color: #070707;
+          color: #fff;
+     }
+
+
+
+     /* =================================================================
+                            # Menu List
+     * ================================================================= */
+
+
+     .data-list {
+          margin-top: 1.5rem;
+          padding-bottom: 3em;
+     }
+
+     .list-lists {
+          display: flex;
+          width: 100%;
+          flex-wrap: wrap;
+          justify-content: space-evenly;
+     }
+
+     .list-item-info {
+          max-width: 500px;
+          width: 100%;
+          display: flex;
+          align-items: center;
+          gap: 1rem;
+          padding: 0.5em 0.7em;
+          margin-top: 0.7em;
+     }
+
+     .list-item-info img {
+          width: 2.5rem;
+          border-radius: 0.4em;
+     }
+
+     .list-item-info .list-title {
+          font-size: 1.3rem;
+          width: 100%;
+     }
+</style>
+{% endblock %}
+
+{% block content %}
+
+
+<section class="search-box-container">
+     <form class="search-box" method="GET" action="{% url 'homepage' %}">
+          <input type="text" name="query" id="search-input" placeholder="शोधा..." value="{{ request.GET.query }}" />
+          <button type="submit" id="search-btn"><i class="bi bi-search"></i></button>
+     </form>
+
+</section>
+
+<section class="menu-item-list">
+     <div class="list-items">
+          <a href="{% url 'homepage' %}" class="menu-item ">सर्व</a>
+          {% for cat in categories_data %}
+          <a href="{% url 'categories' cat.category_name %}"
+               class="menu-item {% if cat.category_name == category %}active{% endif %}">
+               {{ cat.category_name }}
+          </a>
+          {% endfor %}
+
+          {% for list in info_lists %}
+          <a href="{% url 'info_list_detail' list.id %}" class="menu-item">{{ list.name }}</a>
+          {% endfor %}
+     </div>
+</section>
+
+
+<section class="data-list">
+
+     <div class="list-lists">
+          {% for info in information_list %}
+
+          
+          
+          <a href="{% url 'info' info_id=info.id %}" class="list-item-info">
+
+               {% if info.image_data %}
+               <img src="data:image/jpeg;base64,{{ info.get_image_base64 }}" width="200">
+               {% else %}
+               <img src="{% static 'images/no_img.jpeg' %}" alt="">
+          {% endif %}
+               
+               <span class="list-title">{{ info.heading }}</span>
+               <span class="icon"><i class="bi bi-chevron-right"></i></span>
+          </a>
+          {% endfor %}
+
+     </div>
+
+</section>
+
+
+
+
+
+{% endblock %}

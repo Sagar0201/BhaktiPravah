@@ -159,11 +159,7 @@
                {% if info.image_data %}
                <img src="data:image/jpeg;base64,{{ info.get_image_base64 }}" width="200">
                {% else %}
-<<<<<<< HEAD
-               <img src="{% static 'bhakti/images/no_img.jpeg' %}" alt="">
-=======
                <img src="{% static 'images/no_img.jpeg' %}" alt="">
->>>>>>> master
                {% endif %}
 
                <span class="list-title">{{ info.heading }}</span>

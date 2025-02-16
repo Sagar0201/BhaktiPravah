@@ -66,21 +66,3 @@ def info_list_detail(request, info_list_id):
     return render(request, 'info_list_detail.html', {'info_list': info_list, 'information': information})
 
 
-
-
-# ######################################## for APP ########################################
-
-
-
-
-def export_data(request):
-    """ Fetch all data for offline storage """
-    info_data = list(Information.objects.values())
-    info_list_data = list(InfoList.objects.values())
-    info_list_items_data = list(InfoListItem.objects.values())
-
-    return JsonResponse({
-        "information": info_data,
-        "info_lists": info_list_data,
-        "info_list_items": info_list_items_data,
-    }, safe=False)

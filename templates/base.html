@@ -3,6 +3,8 @@
 
 <head>
      {% load static %}
+     <link rel="manifest" href="{% static 'manifest.json' %}">
+
      <meta charset="UTF-8">
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <title>{% block title %}Bhakti Pravah{% endblock %}</title>
@@ -18,7 +20,9 @@
      <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 
      <!-- Custom CSS (optional) -->
-     <link rel="stylesheet" href="{% static 'bhakti/css/style.css' %}">
+     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+
 
      {% block extra_head %}{% endblock %}
 </head>
@@ -284,7 +288,7 @@
           <div class="container-xxl nav-inside">
                <div class="nav-data-1">
                     <div class="nav-data-1-img">
-                         <img src="{% static 'bhakti/images/ganpati bappa.jpeg' %}" alt="">
+                         <img src="{% static 'images/ganpati bappa.jpeg' %}" alt="">
                     </div>
                     <div class="nav-data-1-heading">
                          <h3 class="nav-data-1-title"><a href="{% url 'homepage' %}">भक्ती प्रवाह</a></h3>
@@ -311,6 +315,8 @@
 
                     <li class="nav-data-2-list-item"><a href="{% url 'counter' %}">काउंटर</a></li>
                     <li class="nav-data-2-list-item"><a href="{% url 'home' %}">मुख्यपृष्ठ</a></li>
+                    <button id="install-btn" onclick="installPWA()" style="display: none;">Install App</button>
+
 
                </div>
 
@@ -349,7 +355,41 @@
           integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
      </script>
 
-     <script src="{% static 'bhakti/js/script.js' %}"></script>
+     <script src="{% static 'js/script.js' %}"></script>
+
+
+     <script>
+          if ('serviceWorker' in navigator) {
+               navigator.serviceWorker.register("{% static 'service-worker.js' %}")
+                    .then(reg => console.log("Service Worker Registered", reg))
+                    .catch(err => console.log("Service Worker Registration Failed", err));
+          }
+     </script>
+
+
+     <script>
+          let deferredPrompt;
+          window.addEventListener('beforeinstallprompt', (event) => {
+               event.preventDefault();
+               deferredPrompt = event;
+               document.getElementById('install-btn').style.display = 'block';
+          });
+
+          function installPWA() {
+               if (deferredPrompt) {
+                    deferredPrompt.prompt();
+                    deferredPrompt.userChoice.then(choice => {
+                         if (choice.outcome === 'accepted') {
+                              console.log('PWA installed');
+                         }
+                         deferredPrompt = null;
+                    });
+               }
+          }
+     </script>
+
+
+
 
 
      {% block extra_scripts %}{% endblock %}
@@ -379,10 +419,8 @@
           function closeSidebar() {
                document.getElementById("nav-data-2").style.left = "-100%"; // Hide sidebar
           }
-
-
      </script>
-     
+
 </body>
 
 </html>

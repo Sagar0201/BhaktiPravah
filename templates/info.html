@@ -135,7 +135,7 @@
                {% if information.image_data %}
                <img src="data:image/jpeg;base64,{{ information.get_image_base64 }}" width="200">
                {% else %}
-               <img src="{% static 'bhakti/images/no_img.jpeg' %}" alt="">
+               <img src="{% static 'images/no_img.jpeg' %}" alt="">
                {% endif %}
 
                <div class="info-data-info">
@@ -159,7 +159,7 @@
      </div>
 </section>
 
-<audio id="tone" src="{% static 'bhakti/sound/tune.mp3' %}"></audio> 
+<audio id="tone" src="{% static 'sound/tune.mp3' %}"></audio> 
 
 
 

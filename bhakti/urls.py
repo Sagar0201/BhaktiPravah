@@ -9,6 +9,5 @@ urlpatterns = [
     path('categories/<str:category>/', views.categories, name='categories'),
     path('info_lists/<int:info_list_id>/', views.info_list_detail, name='info_list_detail'),
     path('counter', views.counter, name='counter'),
-    path('export-data/', views.export_data, name='export_data'),
 
 ]

@@ -1,4 +1,4 @@
-let deferredPrompt;
+var deferredPrompt; // Use var to prevent redeclaration errors
 
 document.addEventListener("DOMContentLoaded", () => {
      // Register the service worker
@@ -8,39 +8,39 @@ document.addEventListener("DOMContentLoaded", () => {
                .catch(err => console.error("❌ Service Worker Registration Failed:", err));
      }
 
-     // Listen for the beforeinstallprompt event
+     // Listen for beforeinstallprompt event
      window.addEventListener("beforeinstallprompt", (event) => {
           console.log("📢 beforeinstallprompt event fired");
 
-          // Prevent automatic prompt
           event.preventDefault();
-
-          // Store the event for later use
-          deferredPrompt = event;
+          deferredPrompt = event; // Store the event
 
           // Show the install button
-          document.getElementById("install-button").style.display = "block";
+          const installButton = document.getElementById("install-button");
+          if (installButton) installButton.style.display = "block";
      });
 
      // Install button click event
-     document.getElementById("install-button").addEventListener("click", () => {
-          if (deferredPrompt) {
-               deferredPrompt.prompt();
+     const installButton = document.getElementById("install-button");
+     if (installButton) {
+          installButton.addEventListener("click", () => {
+               if (deferredPrompt) {
+                    deferredPrompt.prompt();
+                    deferredPrompt.userChoice.then((choiceResult) => {
+                         if (choiceResult.outcome === "accepted") {
+                              console.log("✅ User accepted the install prompt");
+                         } else {
+                              console.log("❌ User dismissed the install prompt");
+                         }
+                         deferredPrompt = null; // Reset the prompt
+                    });
+               }
+          });
+     }
 
-               deferredPrompt.userChoice.then((choiceResult) => {
-                    if (choiceResult.outcome === "accepted") {
-                         console.log("✅ User accepted the install prompt");
-                    } else {
-                         console.log("❌ User dismissed the install prompt");
-                    }
-                    deferredPrompt = null; // Reset the prompt
-               });
-          }
-     });
-
-     // Check if PWA is already installed
+     // Hide install button after successful installation
      window.addEventListener("appinstalled", () => {
           console.log("🎉 PWA Installed Successfully");
-          document.getElementById("install-button").style.display = "none"; // Hide button after install
+          if (installButton) installButton.style.display = "none";
      });
 });
